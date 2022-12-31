@@ -23,7 +23,8 @@ def vanity_key(prefix:str, use_hex:bool=False, limit:int=1000000) -> Tuple[str, 
         print(f"Error: prefix must only contain {msg_type} characters: '{char_set}'")
         return None, None
     
-    print(f"Generating vanity {msg_type} public key with prefix: '{prefix}'...", '\n')
+    print(f"Generating vanity {msg_type} public key with prefix: '{prefix}'")
+    print(f'Will make {limit} attempts...', '\n')
     for i in range(1, limit+1):
         private_key, public_key = generate_keys()
         test_key = public_key.hex() if use_hex else public_key.bech32()
@@ -31,7 +32,7 @@ def vanity_key(prefix:str, use_hex:bool=False, limit:int=1000000) -> Tuple[str, 
             print(f'Match on {i}th attempt!')
             print(f'Public key: {test_key}')
             return private_key, public_key
-        elif i % 10000 == 0:
+        elif i % 100000 == 0:
             print(f'Attempt {i}')
     
     print('')

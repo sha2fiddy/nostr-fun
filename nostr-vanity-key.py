@@ -7,7 +7,7 @@ def generate_keys():
     return private_key, public_key
 
 
-def vanity_key(prefix, use_hex=False, limit=1000000):
+def vanity_key(prefix:str, use_hex:bool=False, limit:int=1000000) -> Tuple[str, str]:
     
     hex_chars = '0123456789abcdef'
     bech32_chars = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l'
@@ -24,15 +24,18 @@ def vanity_key(prefix, use_hex=False, limit=1000000):
         return None, None
     
     print(f"Generating vanity {msg_type} public key with prefix: '{prefix}'...", '\n')
-    for i in range(limit):
+    for i in range(1, limit+1):
         private_key, public_key = generate_keys()
         test_key = public_key.hex() if use_hex else public_key.bech32()
         if test_key[start:end] == prefix:
             print(f'Match on {i}th attempt!')
             print(f'Public key: {test_key}')
             return private_key, public_key
-        
-    print(f'Could not find a vanity address in {str(limit)} attempts :(')
+        elif i % 10000 == 0:
+            print(f'Attempt {i}')
+    
+    print('')
+    print(f'Could not find a vanity address in {i} attempts :(')
     return None, None
 
 

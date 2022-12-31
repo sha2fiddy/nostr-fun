@@ -7,7 +7,7 @@ def generate_keys():
     return private_key, public_key
 
 
-def vanity_address(prefix, use_hex=False, limit=1000000):
+def vanity_key(prefix, use_hex=False, limit=1000000):
     
     hex_chars = '0123456789abcdef'
     bech32_chars = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l'
@@ -37,4 +37,4 @@ def vanity_address(prefix, use_hex=False, limit=1000000):
 
 
 # Run program:
-# private_key, public_key = vanity_address(prefix='b00b', use_hex=True, limit=100000)
+# private_key, public_key = vanity_key(prefix='b00b', use_hex=True, limit=1000000)

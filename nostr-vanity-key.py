@@ -1,7 +1,7 @@
 from nostr.key import PrivateKey
 
 
-def generate_keys():
+def generate_keys() -> Tuple[str, str]:
     private_key = PrivateKey()
     public_key = private_key.public_key
     return private_key, public_key
